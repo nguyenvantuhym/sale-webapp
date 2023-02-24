@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.lang.annotation.Annotation;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -44,6 +45,8 @@ public class EmployeeDao extends Database implements IDAO{
             statement.setString(12, employee.isNull(EmployeeCol.imagePath)? null: employee.getString(EmployeeCol.imagePath));
             statement.setObject(13, employee.isNull(EmployeeCol.status)? null: employee.get(EmployeeCol.status));
             statement.setObject(14, employee.isNull(EmployeeCol.positionId)? null: employee.get(EmployeeCol.positionId));
+
+//            statement.setObject(14, employee.isNull(EmployeeCol.)? null: employee.get(EmployeeCol.positionId));
             statement.setObject(15, 1);
             statement.setString(16, employee.isNull(EmployeeCol.createdAt)? null: employee.getString(EmployeeCol.createdAt));
             statement.setString(17, employee.isNull(EmployeeCol.updatedAt)? null: employee.getString(EmployeeCol.updatedAt));

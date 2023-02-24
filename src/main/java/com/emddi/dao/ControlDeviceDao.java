@@ -11,61 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.logging.Logger;
 
+@TableName("control_device")
 public class ControlDeviceDao extends Database implements IDAO{
     public static final Logger LOGGER = Logger.getLogger(ControlDeviceDao.class.getName());
-//    public ControlDevice getDevice(String serialNumber) {
-//        Connection connection = createConnection();
-//        try {
-//            PreparedStatement statement = connection.prepareStatement("SELECT * FROM control_device WHERE serial_number = ?");
-//            statement.setString(1, serialNumber);
-//            ResultSet resultSet = statement.executeQuery();
-//
-//
-//            if (resultSet.next()) {
-//                ControlDevice controlDevice = ControlDevice.builder().build();
-//
-//                controlDevice.setId(resultSet.getInt(ControlDeviceCol.id));
-//                controlDevice.setSerialNumber(resultSet.getString(ControlDeviceCol.serialNumber));
-//                controlDevice.setConfig(resultSet.getString(ControlDeviceCol.config));
-//                controlDevice.setRegistryCode(resultSet.getString(ControlDeviceCol.registryCode));
-//                controlDevice.setName(resultSet.getString(ControlDeviceCol.name));
-//                controlDevice.setZoneId(resultSet.getInt(ControlDeviceCol.zoneId));
-//                controlDevice.setWay(resultSet.getInt(ControlDeviceCol.way));
-//
-//                connection.close();
-//                return controlDevice;
-//            } else {
-//                connection.close();
-//                return null;
-//            }
-//        } catch (SQLException e) {
-//            LOGGER.info((e + ": " + e.getMessage()));
-//        }
-//
-//        return null;
-//    }
-//
-//    public boolean save(ControlDevice device) {
-//        boolean result = false;
-//        Connection connection = createConnection();
-//        try {
-//            PreparedStatement statement = connection.prepareStatement("INSERT INTO control_device (serial_number, config, registry_code) VALUES (?,?,?)");
-//
-//            statement.setString(1, device.getSerialNumber());
-//            statement.setString(2, device.getConfig());
-//            statement.setString(3, device.getRegistryCode());
-//
-//            int success = statement.executeUpdate();
-//            connection.close();
-//
-//            result = success > 0;
-//
-//        } catch (SQLException e) {
-//            LOGGER.info((e + ": " + e.getMessage()));
-//        }
-//
-//        return result;
-//    }
 
     @Override
     public JSONObject syncDownInsertDB(JSONArray jsonArray) throws SQLException {

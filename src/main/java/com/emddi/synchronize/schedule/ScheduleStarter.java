@@ -13,7 +13,7 @@ public class ScheduleStarter implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         System.out.println("Sync Running.....");
         schedulerManager = new ScheduleManager();
-        schedulerManager.runSyncEmployee();
+        schedulerManager.run();
     }
 
     @Override

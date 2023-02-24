@@ -33,6 +33,10 @@ public class SyncPriceInsert extends SyncTask {
         return instance;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
     public SyncPriceInsert(int initDelay, int period, TimeUnit unit) {
         super.setInitDelay(initDelay);
         super.setPeriod(period);

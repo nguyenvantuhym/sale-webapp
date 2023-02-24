@@ -39,6 +39,10 @@ public class SyncFutureTicketValueUpdate extends SyncTask {
         super.setUnit(unit);
     }
 
+    public String getName(){
+        return this.name;
+    }
+
     @Override
     public Runnable taskRunnable() {
         return () -> {

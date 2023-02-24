@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 
-@WebServlet(name = "SyncManagerServlet", urlPatterns = "/sync-manager")
+@WebServlet(name = "SyncManagerServlet", urlPatterns = "/")
 public class SyncManagerServlet extends HttpServlet {
 
     @Override
@@ -39,38 +39,7 @@ public class SyncManagerServlet extends HttpServlet {
                 ScheduleManager.restartTaskByTask(task);
             }
         }
-        resp.sendRedirect("/sync-manager");
-
-
-
-//        if (Auth.authentication(req, resp)) return;
-//        HttpSession session = req.getSession();
-//        Employee employee = (Employee) session.getAttribute("currentEmployee");
-//        TicketDao ticketDao = new TicketDao();
-//        ArrayList<Ticket> tickets = null;
-////
-//        String option = req.getParameter("option");
-//        if (option != null && option.equals("demo")) {
-//            tickets = ticketDao.getTicketDemo();
-//        } else {
-//            String[] idsString = req.getParameterValues("ids");
-//            ArrayList<Integer> ids = new ArrayList<>();
-//            for (String idString : idsString) {
-//                Integer parseInt = Integer.parseInt(idString);
-//                ids.add(parseInt);
-//            }
-//            try {
-//                ticketDao.updatePrintTimeByIds(ids, employee.getEmployeeId());
-//                tickets = (ArrayList<Ticket>) ticketDao.findByIds(ids);
-//            } catch (SQLException e) {
-//                throw new RuntimeException(e);
-//            }
-//            if(tickets.size() < 1){
-//                req.getRequestDispatcher("pages/TicketReport.jsp").forward(req, resp);
-//            }
-//        }
-//        req.setAttribute("ticketsToExport", tickets);
-//        doGet(req, resp);
+        doGet(req,resp);
 
     }
 

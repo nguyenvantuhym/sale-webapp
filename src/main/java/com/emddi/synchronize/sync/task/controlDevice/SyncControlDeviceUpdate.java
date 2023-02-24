@@ -4,6 +4,7 @@ package com.emddi.synchronize.sync.task.controlDevice;
 import com.emddi.dao.ControlDeviceDao;
 import com.emddi.dao.EmployeeDao;
 import com.emddi.dao.IDAO;
+import com.emddi.dao.TableName;
 import com.emddi.synchronize.ApiConst;
 import com.emddi.synchronize.sync.task.SyncTask;
 import lombok.Getter;
@@ -37,6 +38,9 @@ public class SyncControlDeviceUpdate extends SyncTask {
         super.setInitDelay(initDelay);
         super.setPeriod(period);
         super.setUnit(unit);
+    }
+    public String getName(){
+        return this.name;
     }
 
     @Override

@@ -29,11 +29,6 @@
 </head>
 <body>
 
-<c:set var="name" value="Manisha" scope="page" />
-Local Variable :
-<c:out value="${name}" />
-
-
 <div class="container">
     <h1 class="text-center">Sync management</h1>
     <div class="row">
@@ -42,8 +37,9 @@ Local Variable :
             <c:forEach items="${requestScope.tasks}" var="task">
                 <form action="?task=${task.getClass().getSimpleName()}" method="post" class="form" role="form" id="${task.getClass().getSimpleName()}">
                     <legend><a href="">
+                        ${task.getName()}
                         <i class="glyphicon glyphicon-globe"></i>
-                    </a> ${task.name}
+                    </a>
                     </legend>
                     <div class="row">
                         <div class="col-xs-3 col-md-3">
@@ -85,9 +81,14 @@ Local Variable :
 
                     </div>
 
-                    <button class="btn btn-primary btn-block" type="submit"> Set and restart task</button>
+                    <button class="btn btn-primary" type="submit"> Set and restart task</button>
+                    <button class='btn btn-primary' type='button' onclick='stopTask(this)' data-class='${task.getClass().getSimpleName()}' ${!task.getIsStarted()? "disabled" :null} > Stop</button>
+                    <button class='btn btn-primary' type='button' onclick='startTask(this)' data-class='${task.getClass().getSimpleName()}'  ${task.getIsStarted()?"disabled":""}> Start</button>
+
                 </form>
             </c:forEach>
+
+            <button class="btn btn-primary"  type="button"> Set and restart all</button>
 
 
 
@@ -104,6 +105,33 @@ Local Variable :
         });
 
     }
+
+    function stopTask(btn) {
+        let taskName = $(btn).attr("data-class");
+        console.log(taskName);
+        let form = document.createElement("form");
+        document.body.appendChild(form);
+        form.action = "/sync-stop-start?cmd=stop&task="+ taskName;
+        form.method = "POST";
+        form.submit();
+        $(form).remove();
+
+    }
+
+
+    function startTask(btn) {
+        let taskName = $(btn).attr("data-class");
+        console.log(taskName);
+        let form = document.createElement("form");
+        document.body.appendChild(form);
+        form.action = "/sync-stop-start?cmd=start&task="+ taskName;
+        form.method = "POST";
+        form.submit();
+        $(form).remove();
+
+    }
+
+
 </script>
 
 </body>

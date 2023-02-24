@@ -8,4 +8,5 @@ public class FutureTicketValueCol {
     public static final String sync = "sync";
     public static final String createdAt = "created_at";
     public static final String updatedAt = "updated_at";
+    public static final String id = "id";
 }

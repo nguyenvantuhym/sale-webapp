@@ -5,6 +5,7 @@ import com.emddi.synchronize.CloudEndpoint;
 import com.emddi.synchronize.syncdown.ISyncDownInsert;
 import com.emddi.synchronize.syncdown.ISyncDownUpdate;
 import com.emddi.synchronize.syncdown.SyncImp;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import okhttp3.HttpUrl;
@@ -26,13 +27,13 @@ public abstract class SyncTask extends SyncImp implements ISyncDownInsert, ISync
     public static final Logger LOGGER = Logger.getLogger("");
 
 
-    private boolean isStarted = false;
-
     private int initDelay;
 
     private int period;
 
     private TimeUnit unit;
+
+    private Boolean isStarted;
 
     private ScheduledFuture<?> task;
 
@@ -40,7 +41,6 @@ public abstract class SyncTask extends SyncImp implements ISyncDownInsert, ISync
         if(!scheduledThreadPoolExecutor.isShutdown()) {
             isStarted = true;
             try {
-                this.stop();
                 this.task = scheduledThreadPoolExecutor.scheduleAtFixedRate(this.taskRunnable(),this.initDelay, this.period, this.unit);
             } catch (SQLException | JSONException | IOException e) {
                 System.out.println(e);
@@ -51,6 +51,7 @@ public abstract class SyncTask extends SyncImp implements ISyncDownInsert, ISync
     public void restart(ScheduledThreadPoolExecutor scheduledThreadPoolExecutor) {
         if(scheduledThreadPoolExecutor != null && !scheduledThreadPoolExecutor.isShutdown()) {
             if (this.task != null) {
+                this.isStarted = false;
                 this.stop();
             }
             start(scheduledThreadPoolExecutor);
@@ -58,7 +59,10 @@ public abstract class SyncTask extends SyncImp implements ISyncDownInsert, ISync
     }
 
     public void stop() {
-        if(this.task != null) this.task.cancel(true);
+        if(this.task != null) {
+            this.task.cancel(true);
+            isStarted = false;
+        }
     }
 
     public abstract Runnable taskRunnable() throws SQLException, JSONException, IOException;

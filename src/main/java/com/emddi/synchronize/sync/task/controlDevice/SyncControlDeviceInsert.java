@@ -4,6 +4,7 @@ package com.emddi.synchronize.sync.task.controlDevice;
 import com.emddi.dao.ControlDeviceDao;
 import com.emddi.dao.EmployeeDao;
 import com.emddi.dao.IDAO;
+import com.emddi.dao.TableName;
 import com.emddi.synchronize.ApiConst;
 import com.emddi.synchronize.sync.task.SyncTask;
 import lombok.Getter;
@@ -39,17 +40,21 @@ public class SyncControlDeviceInsert extends SyncTask {
         super.setUnit(unit);
     }
 
+    public String getName(){
+        return this.name;
+    }
     @Override
     public Runnable taskRunnable() {
+
+        IDAO controlDevice = new ControlDeviceDao();
         return () -> {
             try {
-
-                IDAO controlDevice = new ControlDeviceDao();
                 this.syncDownInsert(ApiConst.TARGET_CONTROL_DEVICE, controlDevice);
             } catch (SQLException | JSONException | IOException e) {
                 System.out.println(e);
             }
         };
+
     }
 
 

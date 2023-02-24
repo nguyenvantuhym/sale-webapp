@@ -12,12 +12,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class FutureTicketValueDao extends Database implements IDAO{
+
     @Override
     public JSONObject syncDownInsertDB(JSONArray jsonArray) throws SQLException {
         Connection connection = createConnection();
 
-        String SQL_NEW_ORDER_VALUES = "INSERT INTO future_ticket_value (future_ticket_id, price_id, value, code, sync, created_at, updated_at) VALUES" +
-                " (?,?,?,?,?,?,?)";
+        String SQL_NEW_ORDER_VALUES = "INSERT INTO future_ticket_value (future_ticket_id, price_id, value, code, sync, created_at, updated_at, id) VALUES" +
+                " (?,?,?,?,?,?,?,?)";
 
         ArrayList<Integer> idsSuccess = new ArrayList<>();
         ArrayList<Integer> idsFailed = new ArrayList<>();
@@ -25,21 +26,22 @@ public class FutureTicketValueDao extends Database implements IDAO{
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject futureTicketValue = (JSONObject) jsonArray.get(i);
             PreparedStatement statement = connection.prepareStatement(SQL_NEW_ORDER_VALUES);
-            statement.setObject(1, futureTicketValue.isNull(FutureTicketValueCol.futureTicketId)? null: futureTicketValue.getInt(FutureTicketValueCol.futureTicketId));
+            statement.setObject(1, futureTicketValue.isNull(FutureTicketValueCol.futureTicketId)? null: futureTicketValue.get(FutureTicketValueCol.futureTicketId));
             statement.setObject(2, futureTicketValue.isNull(FutureTicketValueCol.priceId)? null: futureTicketValue.getInt(FutureTicketValueCol.priceId));
-            statement.setObject(3, futureTicketValue.isNull(FutureTicketValueCol.value)? null: futureTicketValue.getInt(FutureTicketValueCol.value));
+            statement.setObject(3, futureTicketValue.isNull(FutureTicketValueCol.value)? null: futureTicketValue.get(FutureTicketValueCol.value));
             statement.setString(4, futureTicketValue.isNull(FutureTicketValueCol.code)? null: futureTicketValue.getString(FutureTicketValueCol.code));
             statement.setObject(5, 1);
             statement.setString(6, futureTicketValue.isNull(FutureTicketValueCol.createdAt)? null: futureTicketValue.getString(FutureTicketValueCol.createdAt));
             statement.setString(7, futureTicketValue.isNull(FutureTicketValueCol.updatedAt)? null: futureTicketValue.getString(FutureTicketValueCol.updatedAt));
+            statement.setObject(8, futureTicketValue.isNull(FutureTicketValueCol.id)? null: futureTicketValue.getInt(FutureTicketValueCol.id));
 
             try {
                 int success = statement.executeUpdate();
                 if (success > 0) {
-                    idsSuccess.add(futureTicketValue.getInt(FutureTicketValueCol.futureTicketId));
+                    idsSuccess.add(futureTicketValue.getInt(FutureTicketValueCol.id));
                 }
             } catch (SQLException e){
-                idsFailed.add(futureTicketValue.getInt(FutureTicketValueCol.futureTicketId));
+                idsFailed.add(futureTicketValue.getInt(FutureTicketValueCol.id));
             }
         }
 
@@ -55,7 +57,7 @@ public class FutureTicketValueDao extends Database implements IDAO{
         Connection connection = createConnection();
 
         String SQL_NEW_ORDER_VALUES = "UPDATE future_ticket_value SET future_ticket_id=?, price_id=?, value=?, code=?, sync=?, created_at=?, updated_at=? " +
-                " WHERE future_ticket_id=?";
+                " WHERE id=?";
 
         ArrayList<Integer> idsSuccess = new ArrayList<>();
         ArrayList<Integer> idsFailed = new ArrayList<>();
@@ -63,21 +65,22 @@ public class FutureTicketValueDao extends Database implements IDAO{
         for(int i = 0; i < jsonArray.length(); i++){
             JSONObject futureTicketValue = (JSONObject) jsonArray.get(i);
             PreparedStatement statement = connection.prepareStatement(SQL_NEW_ORDER_VALUES);
-            statement.setObject(1, futureTicketValue.isNull(FutureTicketValueCol.priceId)? null: futureTicketValue.getInt(FutureTicketValueCol.priceId));
-            statement.setObject(2, futureTicketValue.isNull(FutureTicketValueCol.value)? null: futureTicketValue.getInt(FutureTicketValueCol.value));
-            statement.setString(3, futureTicketValue.isNull(FutureTicketValueCol.code)? null: futureTicketValue.getString(FutureTicketValueCol.code));
-            statement.setObject(4, 1);
-            statement.setString(5, futureTicketValue.isNull(FutureTicketValueCol.createdAt)? null: futureTicketValue.getString(FutureTicketValueCol.createdAt));
-            statement.setString(6, futureTicketValue.isNull(FutureTicketValueCol.updatedAt)? null: futureTicketValue.getString(FutureTicketValueCol.updatedAt));
-            statement.setObject(7, futureTicketValue.isNull(FutureTicketValueCol.futureTicketId)? null: futureTicketValue.getInt(FutureTicketValueCol.futureTicketId));
+            statement.setObject(1, futureTicketValue.isNull(FutureTicketValueCol.futureTicketId)? null: futureTicketValue.get(FutureTicketValueCol.futureTicketId));
+            statement.setObject(2, futureTicketValue.isNull(FutureTicketValueCol.priceId)? null: futureTicketValue.get(FutureTicketValueCol.priceId));
+            statement.setObject(3, futureTicketValue.isNull(FutureTicketValueCol.value)? null: futureTicketValue.get(FutureTicketValueCol.value));
+            statement.setString(4, futureTicketValue.isNull(FutureTicketValueCol.code)? null: futureTicketValue.getString(FutureTicketValueCol.code));
+            statement.setObject(5, 1);
+            statement.setString(6, futureTicketValue.isNull(FutureTicketValueCol.createdAt)? null: futureTicketValue.getString(FutureTicketValueCol.createdAt));
+            statement.setString(7, futureTicketValue.isNull(FutureTicketValueCol.updatedAt)? null: futureTicketValue.getString(FutureTicketValueCol.updatedAt));
+            statement.setObject(8, futureTicketValue.isNull(FutureTicketValueCol.id)? null: futureTicketValue.getInt(FutureTicketValueCol.id));
 
             try {
                 int success = statement.executeUpdate();
                 if (success > 0) {
-                    idsSuccess.add(futureTicketValue.getInt(FutureTicketValueCol.futureTicketId));
+                    idsSuccess.add(futureTicketValue.getInt(FutureTicketValueCol.id));
                 }
             } catch (SQLException e){
-                idsFailed.add(futureTicketValue.getInt(FutureTicketValueCol.futureTicketId));
+                idsFailed.add(futureTicketValue.getInt(FutureTicketValueCol.id));
             }
         }
 

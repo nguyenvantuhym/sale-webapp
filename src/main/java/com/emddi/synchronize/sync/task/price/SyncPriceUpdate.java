@@ -38,6 +38,9 @@ public class SyncPriceUpdate extends SyncTask {
         super.setPeriod(period);
         super.setUnit(unit);
     }
+    public String getName(){
+        return this.name;
+    }
 
     @Override
     public Runnable taskRunnable() {

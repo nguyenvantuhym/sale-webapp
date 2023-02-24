@@ -14,6 +14,10 @@ import com.emddi.synchronize.sync.task.gate.SyncGateInsert;
 import com.emddi.synchronize.sync.task.gate.SyncGateUpdate;
 import com.emddi.synchronize.sync.task.price.SyncPriceInsert;
 import com.emddi.synchronize.sync.task.price.SyncPriceUpdate;
+import com.emddi.synchronize.sync.task.ticket.SyncTicketInsert;
+import com.emddi.synchronize.sync.task.ticket.SyncTicketUpdate;
+import com.emddi.synchronize.syncup.SyncUpTicketInsert;
+import com.emddi.synchronize.syncup.SyncUpTicketUpdate;
 
 import java.util.ArrayList;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -25,14 +29,13 @@ public class ScheduleManager {
     public static ArrayList<SyncTask> tasks = new ArrayList<>();
     public static void restartTaskByTask(SyncTask task) {
         task.restart(scheduler);
-
     }
 
     public ScheduleManager(){
         this.scheduler = new ScheduledThreadPoolExecutor(5);
         this.scheduler.setRemoveOnCancelPolicy(true);
     }
-    public void runSyncEmployee() {
+    public void run() {
         SyncEmployeeInsert.init(0,1, TimeUnit.MINUTES);
         SyncEmployeeInsert.getInstance().start(this.scheduler);
         tasks.add(SyncEmployeeInsert.getInstance());
@@ -81,6 +84,22 @@ public class ScheduleManager {
         SyncPriceUpdate.init(0,1, TimeUnit.MINUTES);
         SyncPriceUpdate.getInstance().start(this.scheduler);
         tasks.add(SyncPriceUpdate.getInstance());
+
+        SyncUpTicketUpdate.init(0,1, TimeUnit.MINUTES);
+        SyncUpTicketUpdate.getInstance().start(this.scheduler);
+        tasks.add(SyncUpTicketUpdate.getInstance());
+
+        SyncUpTicketInsert.init(0,1, TimeUnit.MINUTES);
+        SyncUpTicketInsert.getInstance().start(this.scheduler);
+        tasks.add(SyncUpTicketInsert.getInstance());
+
+        SyncTicketInsert.init(0,1, TimeUnit.MINUTES);
+        SyncTicketInsert.getInstance().start(this.scheduler);
+        tasks.add(SyncTicketInsert.getInstance());
+
+        SyncTicketUpdate.init(0,1, TimeUnit.MINUTES);
+        SyncTicketUpdate.getInstance().start(this.scheduler);
+        tasks.add(SyncTicketUpdate.getInstance());
 
     }
 

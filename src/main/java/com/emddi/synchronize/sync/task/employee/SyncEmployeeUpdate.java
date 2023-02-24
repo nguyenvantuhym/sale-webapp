@@ -32,6 +32,10 @@ public class SyncEmployeeUpdate extends SyncTask {
         return instance;
     }
 
+    public String getName(){
+        return this.name;
+    }
+
     public SyncEmployeeUpdate(int initDelay, int period, TimeUnit unit) {
         super.setInitDelay(initDelay);
         super.setPeriod(period);

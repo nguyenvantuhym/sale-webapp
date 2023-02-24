@@ -3,6 +3,7 @@ package com.emddi.database;
 
 
 import com.emddi.constants.StaticConfig;
+import com.emddi.dao.TableName;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
