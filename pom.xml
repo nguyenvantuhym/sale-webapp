@@ -2,10 +2,10 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <groupId>com.emddi</groupId>
-  <artifactId>sync-webapp</artifactId>
+  <artifactId>sale-webapp</artifactId>
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
-  <name>jsp-servlet-example Maven Webapp</name>
+  <name>sale-webapp</name>
   <url>http://maven.apache.org</url>
   <dependencies>
     <dependency>
@@ -14,6 +14,7 @@
       <version>3.8.1</version>
       <scope>test</scope>
     </dependency>
+
 
     <dependency>
       <groupId>javax.servlet</groupId>
@@ -38,6 +39,18 @@
       <artifactId>jstl</artifactId>
       <version>1.2</version>
     </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.zxing/core -->
+    <dependency>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>core</artifactId>
+      <version>3.5.0</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.google.zxing/javase -->
+    <dependency>
+      <groupId>com.google.zxing</groupId>
+      <artifactId>javase</artifactId>
+      <version>3.5.0</version>
+    </dependency>
 
 
 
@@ -46,12 +59,16 @@
       <artifactId>okhttp</artifactId>
       <version>4.9.0</version>
     </dependency>
+
+
     <!-- https://mvnrepository.com/artifact/org.json/json -->
     <dependency>
       <groupId>org.json</groupId>
       <artifactId>json</artifactId>
       <version>20220320</version>
     </dependency>
+
+
 
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -64,10 +81,9 @@
       <artifactId>mysql-connector-java</artifactId>
       <version>8.0.32</version>
     </dependency>
-
   </dependencies>
   <build>
-    <finalName>jsp-servlet-example</finalName>
+    <finalName>sale-webapp</finalName>
       <plugins>
           <plugin>
               <groupId>org.eclipse.jetty</groupId>
@@ -88,6 +104,7 @@
           <configuration>
             <source>8</source>
             <target>8</target>
+            <encoding>UTF-8</encoding>
           </configuration>
         </plugin>
       </plugins>
