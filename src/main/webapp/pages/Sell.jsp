@@ -208,7 +208,7 @@
                                                     <label for="usageTime"
                                                            class="col-5 col-sm-4 col-xl-5 col-form-label col-form-label-sm text-right">Ngày sử dụng</label>
                                                 </div>
-                                                <div class="form-group row flex-row-reverse ">
+                                                <div class="form-group row flex-row-reverse d-none">
 <%--                                                    d-none--%>
                                                     <div class="col-7 col-sm-8 col-xl-7">
                                                         <input type="text"
@@ -231,7 +231,7 @@
                                                     <label for="loai-khach"
                                                            class="col-5 col-sm-4 col-xl-5 col-form-label col-form-label-sm text-right">Loại khách</label>
                                                 </div>
-                                                <div class="form-group row flex-row">
+                                                <div class="form-group row flex-row d-none">
 <%--                                                    d-none--%>
                                                     <label for="bookingPersonEmail"
                                                            class="col-5 col-sm-4 col-xl-5 col-form-label col-form-label-sm text-right">
